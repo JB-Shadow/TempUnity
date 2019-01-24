@@ -8,17 +8,24 @@ public class CameraInput : MonoBehaviour
 	public float CamSens = 0.25f; //How sensitive it with mouse
 	private Vector3 m_LastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
 	private float m_TotalRun = 1.0f;
+	[SerializeField] private GameObject m_Camera;
+
+	private void Start()
+	{
+		if (m_Camera == null)
+		{
+			m_Camera = Camera.main.gameObject;
+		}
+	}
 
 	private void Update()
 	{
 		m_LastMouse = Input.mousePosition - m_LastMouse;
 		m_LastMouse = new Vector3(-m_LastMouse.y * CamSens, m_LastMouse.x * CamSens, 0);
-		m_LastMouse = new Vector3(transform.eulerAngles.x + m_LastMouse.x, transform.eulerAngles.y + m_LastMouse.y, 0);
-		transform.eulerAngles = m_LastMouse;
+		m_LastMouse = new Vector3(m_Camera.transform.eulerAngles.x + m_LastMouse.x, m_Camera.transform.eulerAngles.y + m_LastMouse.y, 0);
+		m_Camera.transform.eulerAngles = m_LastMouse;
 		m_LastMouse = Input.mousePosition;
-		//Mouse  camera angle done.  
 
-		//Keyboard commands
 		Vector3 p = GetBaseInput();
 		if (Input.GetKey(KeyCode.LeftShift))
 		{
@@ -35,23 +42,23 @@ public class CameraInput : MonoBehaviour
 		}
 
 		p = p * Time.deltaTime;
-		Vector3 newPosition = transform.position;
+		Vector3 newPosition = m_Camera.transform.position;
 		if (Input.GetKey(KeyCode.Space))
-		{ //If player wants to move on X and Z axis only
-			transform.Translate(p);
-			newPosition.x = transform.position.x;
-			newPosition.z = transform.position.z;
-			transform.position = newPosition;
+		{ 
+			m_Camera.transform.Translate(p);
+			newPosition.x = m_Camera.transform.position.x;
+			newPosition.z = m_Camera.transform.position.z;
+			m_Camera.transform.position = newPosition;
 		}
 		else
 		{
-			transform.Translate(p);
+			m_Camera.transform.Translate(p);
 		}
 
 	}
 
 	private static Vector3 GetBaseInput()
-	{ //returns the basic values, if it's 0 than it's not active.
+	{ 
 		Vector3 vel = new Vector3();
 		if (Input.GetKey(KeyCode.W))
 		{
