@@ -18,6 +18,7 @@ public class CameraInput : MonoBehaviour
 		}
 	}
 
+	// Update the camera position
 	private void Update()
 	{
 		m_LastMouse = Input.mousePosition - m_LastMouse;
@@ -26,6 +27,7 @@ public class CameraInput : MonoBehaviour
 		m_Camera.transform.eulerAngles = m_LastMouse;
 		m_LastMouse = Input.mousePosition;
 
+		// Keyboard input
 		Vector3 p = GetBaseInput();
 		if (Input.GetKey(KeyCode.LeftShift))
 		{
