@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Test for GitKraken
+
 public class CameraInput : MonoBehaviour
 {
 	public float MainSpeed = 100.0f; //regular speed
