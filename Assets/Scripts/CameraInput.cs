@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Test for Fork
+// Test for vs plugin
 
 public class CameraInput : MonoBehaviour
 {

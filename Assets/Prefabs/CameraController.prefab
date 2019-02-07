@@ -53,5 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainSpeed: 1
   ShiftAdd: 10
-  MaxShift: 1000
+  MaxShift: 100
   CamSens: 0.15
+  m_Camera: {fileID: 0}
